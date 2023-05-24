@@ -3,7 +3,7 @@ const User = require("../models/userModel");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsync = require("./catchAsync");
 
-exports.isAuthenticated = catchAsync(async (req, res, next) => {
+const isAuthenticated = catchAsync(async (req, res, next) => {
 
     const { token } = req.cookies;
 
@@ -13,5 +13,9 @@ exports.isAuthenticated = catchAsync(async (req, res, next) => {
 
     const decodedData = jwt.verify(token, process.env.JWT_SECRET);
     req.user = await User.findById(decodedData.id);
+    req.isServiceProvider = decodedData.isServiceProvider;
     next();
 });
+
+module.exports = isAuthenticated
+//logout route ma id nathi api?
