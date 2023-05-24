@@ -18,4 +18,3 @@ const isAuthenticated = catchAsync(async (req, res, next) => {
 });
 
 module.exports = isAuthenticated
-//logout route ma id nathi api?

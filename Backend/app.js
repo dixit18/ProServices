@@ -21,10 +21,10 @@ const reviewRoute = require('./routes/reviewRoute')
 
 app.use('/api/v1/user',userRoute)
 app.use('/api/v1/services',serviceRoute)
-// app.use('api/v1/bookings',bookingRoute)
-// app.use('api/v1/messageRoute',messageRoute)
-// app.use('api/v1/conversations',conversationRoute)
-// app.use('/api/v1/reviews',reviewRoute)
+app.use('/api/v1/bookings',bookingRoute)
+// app.use('/api/v1/messageRoute',messageRoute)
+// app.use('/api/v1/conversations',conversationRoute)
+app.use('/api/v1/reviews',reviewRoute)
 
 
 app.use(errorMiddleware)

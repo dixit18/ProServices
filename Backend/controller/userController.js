@@ -4,20 +4,28 @@ const ErrorHandler = require("../utils/errorHandler");
 const sendCookie = require("../utils/sendCookie");
 const sendEmail = require("../utils/sendMail");
 const crypto = require("crypto");
+const sendSms = require("../utils/sendSms");
 
 // /api/v1/user/signup
 //public
 //sign up
 const signupUser = catchAsync(async (req, res, next) => {
-  const { name, email, password, isServiceProvider } = req.body;
+  const { name, email, password, isServiceProvider,address,phone } = req.body;
 
   const newUser = await User.create({
     name,
     email,
     password,
     isServiceProvider,
+    address,
+    phone
+  
+    
+    
     // avatar:req.file.filename
   });
+
+  await sendSms()
 
   await sendEmail({
     email: newUser.email,
@@ -73,9 +81,6 @@ const logoutUser = catchAsync(async (req, res, next) => {
     message: "Logged Out",
   });
 });
-//aapde logout login hoy tyare j kariye atle id cookie mathi mali jay n
-//login hoy toj logout enable rrakhvanu  are am j hoy n 
-//front end mathi ha login thay jo user exists toj logout button battavvanu
 
 const getAccountDetails = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user._id);
@@ -159,6 +164,7 @@ const resetPassword = catchAsync(async (req, res, next) => {
   sendCookie(user, 200, res);
 });
 
+const getUser = catchAsync(async (req, res, next) => {});
 module.exports = {
   signupUser,
   loginUser,
@@ -167,4 +173,5 @@ module.exports = {
   deleteProfile,
   forgotPassword,
   resetPassword,
+  getUser,
 };

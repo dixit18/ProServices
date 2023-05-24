@@ -1,7 +1,5 @@
-import mongoose from "mongoose";
-const { Schema } = mongoose;
-
-const ReviewSchema = new Schema(
+const mongoose = require('mongoose');
+const ReviewSchema = new mongoose.Schema(
   {
     serviceId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -28,4 +26,4 @@ const ReviewSchema = new Schema(
   }
 );
 
-export default mongoose.model("Review", ReviewSchema);
+module.exports = mongoose.model("Review", ReviewSchema);

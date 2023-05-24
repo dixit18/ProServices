@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 
 
 const BookingSchema = new mongoose.Schema(
@@ -32,14 +32,18 @@ const BookingSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    payment_intent: {
+    payment: {
       type: String,
       default: false,
     },
+    isCompleted:{
+      type:Boolean,
+      default:false
+    }
   },
   {
     timestamps: true,
   }
 );
 
-export default mongoose.model("Book", BookingSchema);
+module.exports = mongoose.model("Book", BookingSchema);
