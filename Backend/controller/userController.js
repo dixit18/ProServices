@@ -4,7 +4,7 @@ const ErrorHandler = require("../utils/errorHandler");
 const sendCookie = require("../utils/sendCookie");
 const sendEmail = require("../utils/sendMail");
 const crypto = require("crypto");
-const sendSms = require("../utils/sendSms");
+
 
 // /api/v1/user/signup
 //public
@@ -25,7 +25,6 @@ const signupUser = catchAsync(async (req, res, next) => {
     // avatar:req.file.filename
   });
 
-  await sendSms()
 
   await sendEmail({
     email: newUser.email,
