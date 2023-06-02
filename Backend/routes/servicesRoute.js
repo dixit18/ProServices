@@ -10,7 +10,7 @@ router
   .post(isAuthenticated, serviceController.createService)
   .get(serviceController.getServices);
 router
-  .route("/:id")
+  .route("/single/:id")
   .delete(isAuthenticated, serviceController.deleteService)
   .get(serviceController.getService);
 

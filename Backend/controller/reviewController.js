@@ -50,4 +50,3 @@ module.exports = {
     getReviews,
     deleteReview,
 }
-//apdo hisab ketlo 6 90 hata psi 2 pachi 3 j ajay na jay a aapi didha toy 4 thai ne kena 4 total 6 hat

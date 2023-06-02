@@ -19,7 +19,7 @@ router.route('/resetpassword/:token').patch(userController.resetPassword)
 
 
 
-router.get("/:id", isAuthenticated,userController.getUser);
+router.get("/:id",userController.getUser);
 
 
 module.exports = router;

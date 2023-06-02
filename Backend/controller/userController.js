@@ -4,13 +4,14 @@ const ErrorHandler = require("../utils/errorHandler");
 const sendCookie = require("../utils/sendCookie");
 const sendEmail = require("../utils/sendMail");
 const crypto = require("crypto");
-
+const { default: mongoose } = require("mongoose");
 
 // /api/v1/user/signup
 //public
 //sign up
 const signupUser = catchAsync(async (req, res, next) => {
-  const { name, email, password, isServiceProvider,address,phone } = req.body;
+  const { name, email, password, isServiceProvider, address, phone, avatar } =
+    req.body;
 
   const newUser = await User.create({
     name,
@@ -18,13 +19,11 @@ const signupUser = catchAsync(async (req, res, next) => {
     password,
     isServiceProvider,
     address,
-    phone
-  
-    
-    
+    phone,
+    avatar,
+
     // avatar:req.file.filename
   });
-
 
   await sendEmail({
     email: newUser.email,
@@ -51,8 +50,9 @@ const signupUser = catchAsync(async (req, res, next) => {
 
 const loginUser = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
+  console.log(email);
   const user = await User.findOne({ email }).select("+password");
-
+  console.log(user);
   if (!user) {
     return next(new ErrorHandler("User doesn't exist", 401));
   }
@@ -163,7 +163,20 @@ const resetPassword = catchAsync(async (req, res, next) => {
   sendCookie(user, 200, res);
 });
 
-const getUser = catchAsync(async (req, res, next) => {});
+const getUser = async (req, res, next) => {
+  const id = req.params.id;
+
+  const userId = new mongoose.Types.ObjectId(id);
+  try {
+    const user = await User.findById(userId);
+    console.log(user);
+
+    res.status(200).json({ user });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ message: err.message });
+  }
+};
 module.exports = {
   signupUser,
   loginUser,

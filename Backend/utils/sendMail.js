@@ -9,7 +9,7 @@ const sendEmail = async (options) => {
     requireTLS: true,
     auth: {
       user: "dixitparmar6113@gmail.com",
-      pass: "wblnfklbdnumiafy",
+      pass: process.env.MAIL_KEY,
     },
   });
 

@@ -16,49 +16,51 @@ const createService = catchAsync(async (req, res, next) => {
   });
 
   const savedService = await newService.save();
+  console.log(savedService);
 
   res.status(201).json(savedService);
 });
 const deleteService = catchAsync(async (req, res, next) => {
   const service = await ServiceModel.findById(req.params.id);
- 
+
   if (service.userId.toString() !== req.user._id.toString()) {
     return next(new ErrorHandler("you can delete only your service", 403));
   }
 
-  await serviceModel.findByIdAndDelete(req.params.id);
+  await ServiceModel.findByIdAndDelete(req.params.id);
   res.status(200).json({
     msg: "service has been deleted",
   });
 });
 const getService = catchAsync(async (req, res, next) => {
-const service = await ServiceModel.findById(req.params.id)
-if(!service) next(new ErrorHandler("service not found",404))
+  const service = await ServiceModel.findById(req.params.id);
+  if (!service) next(new ErrorHandler("service not found", 404));
 
-res.status(200).json({service});
-
-
-
+  res.status(200).json({ service });
 });
 const getServices = catchAsync(async (req, res, next) => {
-    const queryObj = req.query
+  const queryObj = req.query;
 
-    const filters = {
-        ...(queryObj.userId && { userId: queryObj.userId }),
-        ...(queryObj.category && { category: queryObj.category }),
-        ...((queryObj.min || queryObj.max) && {
-          price: {
-            ...(queryObj.min && { $gt: queryObj.min }),
-            ...(queryObj.max && { $lt: queryObj.max }),
-          },
-        }),
-        ...(queryObj.search && { title: { $regex: queryObj.search, $options: "i" } })
-    }
-    const services = await ServiceModel.find(filters)
+  const filters = {
+    ...(queryObj.userId && { userId: queryObj.userId }),
+    ...(queryObj.category && { category: queryObj.category }),
+    ...((queryObj.min || queryObj.max) && {
+      price: {
+        ...(queryObj.min && { $gt: queryObj.min }),
+        ...(queryObj.max && { $lt: queryObj.max }),
+      },
+    }),
+    ...(queryObj.search && {
+      title: { $regex: queryObj.search, $options: "i" },
+    }),
+  };
+  const services = await ServiceModel.find(filters).sort({
+    [queryObj.sort]: -1,
+  });
 
-    if(!services) next(new ErrorHandler("no services found",404));
+  if (!services) next(new ErrorHandler("no services found", 404));
 
-    res.status(200).json({services});
+  res.status(200).json({ services });
 });
 
 module.exports = {

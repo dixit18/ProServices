@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
+      default:'something.png'
     },
     isServiceProvider: {
       type: Boolean,
