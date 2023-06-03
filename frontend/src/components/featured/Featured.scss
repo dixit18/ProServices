@@ -2,23 +2,21 @@
   height: 600px;
   display: flex;
   justify-content: center;
+  background-color: white;
+  color: #424242;
 
-  // background-color: #005D5D;
-  color: black;
-  
-  
   .container {
-    background-image:url(https://res.cloudinary.com/urbanclap/image/upload/images/growth/home-screen/1615375782838-f890f8.jpeg);
-    width: 100%;
+    width: 1400px;
     display: flex;
     align-items: center;
-    justify-content: center;
 
     .left {
       display: flex;
       flex-direction: column;
       gap: 30px;
-
+      .back-img{
+        color:#4821e7cc;
+      }
       h1 {
         font-size: 50px;
 
@@ -29,19 +27,21 @@
       }
 
       .search {
-        background-color:  white;
+        background-color: #424242;
         border-radius: 5px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         overflow: hidden;
+        color: #424242;
 
         .searchInput {
           display: flex;
           align-items: center;
           gap: 10px;
+          color: #424242;
           img {
-            width: 100%;
+            width: 20px;
             height: 20px;
             margin: 10px;
           }
@@ -49,9 +49,11 @@
           input {
             border: none;
             outline: none;
+            color: white;
+            background-color: #424242;
 
             &::placeholder {
-              color: gray;
+              color: white;;
             }
           }
         }
@@ -60,15 +62,12 @@
           width: 120px;
           height: 50px;
           border: none;
-          background-color: #008080;
+          background-color: #4821e7cc;
           color: white;
           align-self: flex-end;
           cursor: pointer;
-          &:hover{
-            background-color: #005D5D;
-          }
+          font-size: x-large;
         }
-       
       }
 
       .popular {
@@ -94,6 +93,7 @@
 
     .right {
       height: 100%;
+      flex:2;
       img {
         height: 100%;
         object-fit: contain;

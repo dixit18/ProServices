@@ -1,23 +1,49 @@
 .navbar {
-
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #008080;
+  // background-color: #013914;
+  background-color: #4821e7cc;
+
   color: white;
   position: sticky;
   top: 0;
   z-index: 999;
   transition: 0.5s all ease;
 
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+    }
+
+    .container {
+      width: 100%;
+      padding: 0 10px;
+    }
+
+    .links {
+      display: none;
+    }
+
+    .menu {
+      display: none;
+    }
+  }
+
   &.active {
     background-color: white;
     color: black;
 
     button {
-      background-color: white !important;
-      color: #1dbf73 !important;
-      border: 1px solid #1dbf73 !important;
+      background-color: #4821e7cc !important;
+      color: 636182 !important;
+      border: 2px solid black !important;
+    }
+    &{
+      color: black;
     }
   }
 
@@ -37,7 +63,7 @@
 
       .dot {
         font-weight: bold;
-        color: #008080;
+        color: #1dbf73;
       }
     }
     .links {
@@ -92,8 +118,8 @@
         cursor: pointer;
 
         &:hover {
-          background-color: #1dbf73;
-          border-color: #1dbf73;
+          background-color: #000000;
+          border-color: #999999;
         }
       }
     }
@@ -107,26 +133,12 @@
   }
 
   .menu {
-    // max-height: 1200px;
-    width: 100%;
-    margin: 5px 5px;
-    padding: 5px 5px;
+    width: 1400px;
+    padding: 10px 0px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     color: gray;
     font-weight: 300;
     font-family: "Montserrat", sans-serif;
-
-    span {
-      font-size: small;
-    }
-
-    .img-for-cat{
-      height: 30px;
-      width: 30px;
-    }
-
-   
   }
 }

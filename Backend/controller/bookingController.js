@@ -62,9 +62,10 @@ const service = await ServiceModel.findById(req.params.id);
   });
 }
 const confirm = async(req,res,next)=>{
+  console.log("req",req.body)
   const orders = await BookingModel.findOneAndUpdate(
     {
-      payment: req.body.payment,
+      payment: req.body.payment_intent,
     },
     {
       $set: {
@@ -74,7 +75,7 @@ const confirm = async(req,res,next)=>{
       new: true
     }
   );
-
+console.log(orders);
   res.status(200).json("Order has been confirmed.");
 }
 module.exports = {

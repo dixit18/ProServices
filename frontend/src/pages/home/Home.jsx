@@ -1,7 +1,7 @@
 import React from "react";
 import "./Home.scss";
 import Featured from "../../components/featured/Featured";
-import TrustedBy from "../../components/trustedBy/TrustedBy";
+
 import Slide from "../../components/slide/Slide";
 import CatCard from "../../components/catCard/CatCard";
 import ProjectCard from "../../components/projectCard/ProjectCard";
@@ -11,7 +11,7 @@ function Home() {
   return (
     <div className="home">
       <Featured />
-      <TrustedBy />
+      
       <Slide slidesToShow={4} arrowsScroll={4}>
         {cards.map((card) => (
           <CatCard key={card.id} card={card} />
@@ -69,6 +69,7 @@ function Home() {
                 src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/graphics-design.d32a2f8.svg"
                 alt=""
               />
+              
               <div className="line"></div>
               <span>Graphics & Design</span>
             </div>
@@ -152,18 +153,18 @@ function Home() {
         <div className="container">
           <div className="item">
             <h1>
-              liverr <i>business</i>
+              ProService
             </h1>
             <h1>
-              A business solution designed for <i>teams</i>
+              A  solution designed for <i>Home</i>
             </h1>
             <p>
               Upgrade to a curated experience packed with tools and benefits,
-              dedicated to businesses
+              
             </p>
             <div className="title">
               <img src="./img/check.png" alt="" />
-              Connect to freelancers with proven business experience
+              Connect to local Service Provider with User
             </div>
 
             <div className="title">
@@ -175,7 +176,7 @@ function Home() {
               <img src="./img/check.png" alt="" />
               Manage teamwork and boost productivity with one powerful workspace
             </div>
-            <button>Explore Liverr Business</button>
+            <button>Explore ProService</button>
           </div>
           <div className="item">
             <img

@@ -38,7 +38,7 @@ function App() {
       </div>
     );
   };
-//kon?
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -83,17 +83,19 @@ function App() {
         {
           path: "/success",
           element: <Success/>,
-        }
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/signup",
+          element: <Register />,
+        },
       ],
     },
-    {
-      path: "/signup",
-      element: <Register />,
-    },
-    {
-      path: "/login",
-      element: <Login />,
-    },
+    
+    
   ]);
 
   return <RouterProvider router={router} />;

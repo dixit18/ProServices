@@ -24,7 +24,7 @@ function NavbarComp() {
     };
   }, []);
 
-  // const currentUser = null
+
 
   let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
@@ -41,140 +41,68 @@ function NavbarComp() {
   };
 
   return (
-    <Navbar className="sticky top-0 text-base md:text-xl" fluid rounded>
-      <Navbar.Brand href="/">
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          ProSkill
-        </span>
-      </Navbar.Brand>
-      <Navbar.Collapse>
-        <Navbar.Link active href="#">
-          <p>Getting Started</p>
-        </Navbar.Link>
-        <Navbar.Link href="#">About</Navbar.Link>
-        <Navbar.Link href="/services?category=Home Services">
-          Services
-        </Navbar.Link>
 
-        <Navbar.Link href="#">Contact</Navbar.Link>
-      </Navbar.Collapse>
-      {currentUser ? (
-        <div className="flex md:order-2">
-          <Dropdown
-            inline
-            label={
-              <Avatar
-                alt="User settings"
-                img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                rounded
+    <div className={active || pathname !== "/" ? "navbar active" : "navbar"}>
+
+      <div className="container">
+        <div className="logo">
+          <Link className="link" to="/">
+            <span className="text">ProService</span>
+          </Link>
+       
+        </div>
+        <div className="links">
+          {!currentUser?.isServiceProvider && <span>Pro Apply</span>}
+          <span>Help</span>
+          <span>Explore</span>
+
+          {currentUser ? (
+            <div className="user" onClick={() => setOpen(!open)}>
+
+              <img
+                src={currentUser.user.avatar || "../../../public/img/heart.png"}
+                alt=""
               />
-            }
-          >
-            <Dropdown.Header>
-              <span className="block text-sm">Bonnie Green</span>
-              <span className="block truncate text-sm font-medium">
-                name@flowbite.com
-              </span>
-            </Dropdown.Header>
-            <Dropdown.Item>Dashboard</Dropdown.Item>
-            <Dropdown.Item>Settings</Dropdown.Item>
-            <Dropdown.Item>Earnings</Dropdown.Item>
-            <Dropdown.Divider />
-            <div onClick={handleLogout}>
-              <Dropdown.Item>Sign out</Dropdown.Item>
+              <span>{currentUser?.user.name}</span>
+              
+              {open && (
+                <div className="options">
+                  {currentUser.user.isServiceProvider && (
+                    <>
+                      <Link className="link" to="/myservices">
+                        Services
+                      </Link>
+                      <Link className="link" to="/add">
+                        Add New Service
+                      </Link>
+                    </>
+                  )}
+                  <Link className="link" to="/bookings">
+                    Bookings
+                  </Link>
+                  <Link className="link" to="/messages">
+                    Messages
+                  </Link>
+                  <Link className="link" onClick={handleLogout}>
+                    Logout
+                  </Link>
+                </div>
+              )}
             </div>
-          </Dropdown>
-          <Navbar.Toggle />
+          ) : (
+            <>
+              <Link className="link" to="/login">
+                <span>Sign in</span>
+              </Link>
+              <Link className="link" to="/signup">
+                <button>Register</button>
+              </Link>
+            </>
+          )}
         </div>
-      ) : (
-        <div className="flex gap-2">
-          <Link to="/login">
-            <Button>Login</Button>
-          </Link>
-          <Link to="/signup">
-            <Button>Sign Up</Button>
-          </Link>
-        </div>
-      )}
- 
-    </Navbar>
-
-    // <div className={active || pathname !== "/" ? "navbar active" : "navbar"}>
-
-    //   <div className="container">
-    //     <div className="logo">
-    //       <Link className="link" to="/">
-    //         <span className="text">ProSkill</span>
-    //       </Link>
-    //       <span className="dot">.</span>
-    //     </div>
-    //     <div className="links">
-    //       {!currentUser?.isServiceProvider && <span>Pro Apply</span>}
-    //       <span>Help</span>
-    //       <span>Explore</span>
-
-    //       {currentUser ? (
-    //         <div className="user" onClick={() => setOpen(!open)}>
-
-    //           <img
-    //             src={currentUser.user.avatar || "../../../public/img/heart.png"}
-    //             alt=""
-    //           />
-    //           <span>{currentUser?.username}</span>
-    //           {open && (
-    //             <div className="options">
-    //               {currentUser.user.isServiceProvider && (
-    //                 <>
-    //                   <Link className="link" to="/myservices">
-    //                     Services
-    //                   </Link>
-    //                   <Link className="link" to="/add">
-    //                     Add New Service
-    //                   </Link>
-    //                 </>
-    //               )}
-    //               <Link className="link" to="/bookings">
-    //                 Bookings
-    //               </Link>
-    //               <Link className="link" to="/messages">
-    //                 Messages
-    //               </Link>
-    //               <Link className="link" onClick={handleLogout}>
-    //                 Logout
-    //               </Link>
-    //             </div>
-    //           )}
-    //         </div>
-    //       ) : (
-    //         <>
-    //           <Link className="link" to="/login">
-    //             <span>Sign in</span>
-    //           </Link>
-    //           <Link className="link" to="/signup">
-    //             <button>Register</button>
-    //           </Link>
-    //         </>
-    //       )}
-    //     </div>
-    //   </div>
-    //   {(active || pathname !== "/") && (
-    //     <>
-    //       <hr />
-    //       <div className="menu">
-    //       {/* {
-    //         services.map((service, index) =>{
-
-    //          return ( <NavCat key={index} service={{img:services[index].img,name:services[index].name}}/> )
-    //         })
-    //       } */}
-
-    //         </div>
-
-    //       <hr />
-
-    //     </>
-    //   )}
-    // </div>
+      </div>
+     
+    </div>
   );
 }
 

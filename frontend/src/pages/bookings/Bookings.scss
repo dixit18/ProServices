@@ -6,6 +6,7 @@
   .container {
     width: 1400px;
     padding: 50px 0px;
+    height: 52vh;
 
     .title {
       display: flex;
@@ -30,8 +31,7 @@
           text-align: left;
         }
         td {
-          
-          sup{
+          sup {
             font-size: 12px;
           }
 
@@ -53,3 +53,5 @@
     }
   }
 }
+
+

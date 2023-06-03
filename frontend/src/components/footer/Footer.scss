@@ -2,7 +2,8 @@
   display: flex;
   justify-content: center;
   color: #666;
-  margin: 50px 0px;
+  margin-top: 50px 0px;
+
 
   img {
     width: 24px;
@@ -10,6 +11,7 @@
   }
 
   .container {
+    flex-shrink: 0;
     width: 1400px;
     .top {
       display: flex;
