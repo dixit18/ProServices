@@ -14,14 +14,7 @@ const Reviews = ({ gigId }) => {
       }),
   });
 
-  // const mutation = useMutation({
-  //   mutationFn: (review) => {
-  //     return newRequest.post("/reviews", review);
-  //   },
-  //   onSuccess:()=>{
-  //     queryClient.invalidateQueries(["reviews"])
-  //   }
-  // });
+
   const mutation = useMutation({
     mutationFn: async (review) => {
       try {

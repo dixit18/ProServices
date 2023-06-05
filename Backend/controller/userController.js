@@ -165,7 +165,7 @@ const resetPassword = catchAsync(async (req, res, next) => {
 
 const getUser = async (req, res, next) => {
   const id = req.params.id;
-
+console.log(id)
   const userId = new mongoose.Types.ObjectId(id);
   try {
     const user = await User.findById(userId);
