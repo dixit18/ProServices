@@ -39,7 +39,7 @@ const stripe = new Stripe(process.env.STRIPE)
 const service = await ServiceModel.findById(req.params.id);
 
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: service.price ,
+    amount: Math.round(service.price *100),
     currency: "inr",
     automatic_payment_methods: {
       enabled: true,
