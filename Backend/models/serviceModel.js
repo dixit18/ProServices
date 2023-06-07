@@ -24,8 +24,8 @@ const ServiceSchema = new mongoose.Schema(
       default: 1,
     },
     category: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref:"Category",
+      type: String,
+      
       required: true,
     },
     price: {
