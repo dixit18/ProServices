@@ -2,11 +2,21 @@ const catchAsync = require("../middleware/catchAsync");
 const ErrorHandler = require("../utils/errorHandler");
 const ReviewModel = require("../models/reviewModel.js")
 const ServiceModel = require("../models/serviceModel")
-
+const BookingModel = require("../models/bookingModel")
 
 const createReview = catchAsync(async (req, res, next)=>{
     if(req.isServiceProvider) return next(new ErrorHandler("Service Provider Can't Create Review!",403))
 
+    const booking = await BookingModel.findOne({
+        serviceId: req.body.serviceId,
+        buyerId: req.user._id,
+        isCompleted: true,
+      });
+    
+      if (!booking) {
+        return next(new ErrorHandler("You must book the service to review.", 403));
+      }
+    
     const newReview = new ReviewModel({
         userId:req.user._id,
         serviceId:req.body.serviceId,

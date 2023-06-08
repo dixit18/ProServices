@@ -54,7 +54,7 @@ const loginUser = catchAsync(async (req, res, next) => {
   const user = await User.findOne({ email }).select("+password");
   console.log(user);
   if (!user) {
-    return next(new ErrorHandler("User doesn't exist", 401));
+    return next(new ErrorHandler("Use right credential", 401));
   }
 
   const isPasswordMatched = await user.comparePassword(password);

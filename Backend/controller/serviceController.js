@@ -32,6 +32,8 @@ const deleteService = catchAsync(async (req, res, next) => {
     msg: "service has been deleted",
   });
 });
+
+
 const getService = catchAsync(async (req, res, next) => {
   const service = await ServiceModel.findById(req.params.id);
   if (!service) next(new ErrorHandler("service not found", 404));
