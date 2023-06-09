@@ -7,10 +7,18 @@ import { toast } from "react-toastify";
 import { Axios } from "../../config";
 import requests from "../../libs/request";
 import { FiChevronRight } from "react-icons/fi";
+import { useSelector,useDispatch } from "react-redux";
+import { logoutAsync } from "../../redux/Slices/userSlice";
+import Profile from "../../pages/Profile/Profile";
 
+ 
 const Navbar = () => {
+  const dispatch = useDispatch()
   const [showModal, setShowModal] = useState(false);
+  const [profileModel,setProfileModal] = useState(false)
   const navigate = useNavigate();
+  const user= useSelector(state=>state.auth)
+  console.log("user from navbar",user)
   // const { authUser, removeAuthUser } = useAuthStore();
   const [active, setActive] = useState(false);
   const [openDrop, setOpenDrop] = useState(false);
@@ -53,13 +61,14 @@ const Navbar = () => {
     }
   };
 
-  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  // let user = JSON.parse(localStorage.getItem("user"));
 
   const handleLogout = async () => {
     try {
-      await Axios.get(requests.logout);
+      // await Axios.get(requests.logout);
       // removeAuthUser();
-      localStorage.setItem("currentUser", null);
+      // localStorage.setItem("user", null);
+      dispatch(logoutAsync())
       toast.success("Logout Successfully", {
         position: "bottom-right",
         toastId: 1,
@@ -125,30 +134,34 @@ const Navbar = () => {
               Services
             </NavLink>
 
-            {!currentUser?.user.isServiceProvider && (
+            {!user?.isServiceProvider && (
               <p className="cursor-pointer hidden lg:flex">Pro Apply</p>
             )}
-            {currentUser ? (
+            {user.isLoogedIn ? (
               <>
-                {currentUser && (
+                {user && (
                   <div
                     className="relative flex flex-col sm:flex-row items-center sm:gap-4 cursor-pointer"
                     onClick={() => setOpenDrop((prev) => !prev)}
                   >
                     <img
-                      src={currentUser.user.avatar || Avatar}
+                      src={user.avatar || Avatar}
                       alt="user_image"
                       className="w-[32px] h-[32px] rounded-[50%] object-cover"
                     />
-                    <span>{currentUser?.user.name}</span>
+                    <span>{user?.name}</span>
+                    
                     <div
                       ref={modalRef}
                       className={`absolute top-12 right-0 p-3 z-10 bg-white border rounded-md text-black flex-col items-start gap-3 w-[200px] font-medium transition-transform duration-300 ${
                         openDrop ? "flex" : "hidden"
                       }`}
                     >
-                      {currentUser?.user.isServiceProvider && (
+                      {user?.isServiceProvider && (
                         <>
+                      <NavLink>
+                        Profile
+                      </NavLink>
                           <NavLink
                             to="/myservices"
                             className="cursor-pointer w-full text-sm text-darkColor"
@@ -235,8 +248,10 @@ const Navbar = () => {
           </div>
         </div>
       )}
+
+
     </header>
   );
 };
 
-export default Navbar;
+export  {Navbar};

@@ -4,19 +4,23 @@ import { Button, Label, TextInput, Toast } from 'flowbite-react';
 import { useNavigate } from "react-router-dom";
 import requests from "../../libs/request";
 import { toast } from "react-toastify";
+import { useDispatch,useSelector } from "react-redux";
+import { loginAsync } from "../../redux/Slices/userSlice";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+ const dispatch = useDispatch()
  
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await Axios.post(`${requests.login}`, { email, password });
-      console.log(res.user);
-      localStorage.setItem("currentUser", JSON.stringify(res.data));
+      // const res = await Axios.post(`${requests.login}`, { email, password });
+      // console.log(res);
+      // localStorage.setItem("token", JSON.stringify(res.data));
+      dispatch(loginAsync({ email, password }))
       navigate("/");
     } catch (err) {
       console.log(err);

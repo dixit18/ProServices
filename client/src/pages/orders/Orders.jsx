@@ -17,33 +17,10 @@ const Orders = () => {
     queryFn: () => Axios.get(`${requests.orders}`).then((res) => res.data.booking),
   });
 
-  // const handleContact = async (order) => {
-  //   const sellerId = order.sellerId;
-  //   const buyerId = order.buyerId;
-  //   const id = sellerId + buyerId;
-  //   try {
-  //     const res = await Axios.get(`${requests.conversations}/single/${id}`);
-  //     navigate(`/messages/${res.data.id}`);
-  //   } catch (err) {
-  //     if (err?.response?.status === 404) {
-  //       const res = await Axios.post(`${requests.conversations}/`, {
-  //         to: authUser.seller ? buyerId : sellerId,
-  //       });
-  //       navigate(`/messages/${res.data.id}`);
-  //     }
-  //   }
-  // };
+
 console.log(data)
   const tableActions = data?.map((item) => ({
-    // image: (
-    //   <div className="w-14 h-14">
-    //     <img
-    //       src={item.img}
-    //       alt={item.username}
-    //       className="w-full h-full object-cover rounded-full"
-    //     />
-    //   </div>
-    // ),
+  
     title: (
       <p className="w-full flex items-center justify-start">{item.title}</p>
     ),

@@ -20,7 +20,7 @@ const Pagination1 = ({ currentPage, totalPages, onPageChange }) => {
         <div
         style={{ display: "flex", marginTop: "3rem", justifyContent: "center" }}
       >
-        <ThemeProvider theme={theme}>
+       
         <Stack spacing={2} justifyContent="center">
 
           <Pagination
@@ -39,7 +39,7 @@ const Pagination1 = ({ currentPage, totalPages, onPageChange }) => {
             }}
             />
             </Stack>
-        </ThemeProvider>
+    
       </div>
     );
   };

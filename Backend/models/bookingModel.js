@@ -36,6 +36,7 @@ const BookingSchema = new mongoose.Schema(
       type: String,
       default: false,
     },
+    
     isCompleted:{
       type:Boolean,
       default:false

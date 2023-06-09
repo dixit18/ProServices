@@ -33,13 +33,9 @@ const ServiceOrder = ({ data, id }) => {
         ))}
       </div>
       <Link to={`/pay/${id}`} className="w-full">
-      <button
-      className="w-full h-10 rounded bg-primary/95 text-white hover:bg-primary outline-none"
-      disabled={!isLoggedIn}
-      
-    >
-      Continue
-    </button>
+        <button className="w-full h-10 rounded bg-primary/95 text-white hover:bg-primary outline-none">
+          Continue
+        </button>
       </Link>
     </div>
   );

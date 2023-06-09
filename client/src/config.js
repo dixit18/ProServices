@@ -1,5 +1,5 @@
 import axios from "axios";
-export const Axios = axios.create({
+export   const Axios = axios.create({
   baseURL: "http://localhost:5000/api/v1",
   withCredentials: true,
   headers: {
@@ -8,3 +8,4 @@ export const Axios = axios.create({
     credentials: "include",
   },
 });
+ 

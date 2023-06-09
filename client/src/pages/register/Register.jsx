@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import CustomizeInput from "../../utils/Input/CustomizeInput";
 import CustomizeTextArea from "../../utils/Input/CustomizeTextarea";
 import { useNavigate } from "react-router-dom";
-import { Axios } from "../../config";
+import {Axios}  from "../../config";
 import requests from "../../libs/request";
 import { toast } from "react-toastify";
 import loader from "../../assets/icons/loader.svg";
