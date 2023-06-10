@@ -90,7 +90,7 @@ function Gig() {
               "Something went wrong!"
             ) : (
               <div className="seller">
-                <h2>About The Seller</h2>
+                <h2>About The ServiceProvider</h2>
                 <div className="user">
                   <img src={dataUser?.user?.avatar || "/img/noavatar.jpg"} alt="" />
                   <div className="info">

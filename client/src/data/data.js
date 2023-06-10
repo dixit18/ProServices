@@ -648,8 +648,12 @@ export const ordersColumns = [
     header: "Price",
   },
   {
-    field: "actions",
+    field:"Contact",
     header: "Contact",
+  },
+  {
+    field: "actions",
+    header: "Status",
   },
 ];
 export const messageColumns = [

@@ -77,7 +77,7 @@ const ServiceDetails = ({ data, id, userId }) => {
       </p>
       <div className="flex flex-col gap-3 mt-5 w-full">
         <h2 className="text-xl font-semibold text-gray-500">
-          About The Seller
+          About The ServiceProvider
         </h2>
         <div className="flex items-start justify-start gap-3 w-full">
           <img

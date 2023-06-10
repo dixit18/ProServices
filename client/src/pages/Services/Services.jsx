@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 // import React, { useRef, useState, useEffect } from "react";
 // import { BiHomeAlt, BiChevronDown } from "react-icons/bi";
 

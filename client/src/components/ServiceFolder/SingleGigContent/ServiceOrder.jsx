@@ -3,15 +3,24 @@ import React from "react";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { BsCheckLg } from "react-icons/bs";
 import { TfiReload } from "react-icons/tfi";
-import { Link } from "react-router-dom";
+import { Link, useParams,useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
-
+import { Axios } from "../../../config";
+import requests from "../../../libs/request";
 
 const ServiceOrder = ({ data, id }) => {
-  
+  console.log(id)
+  const {id:paramId} = useParams();
+  console.log(paramId,"oatd")
+  const nevigate = useNavigate()
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+const handleBooking = async (e)=>{
+  e.preventDefault()
+const response = await Axios.post(`${requests.orders}/${id}`)
+nevigate('/bookings')
+console.log(response,"from serviceorder")
+}
 
   return (
     <div className="w-full bg-white border p-4 flex flex-col gap-4 items-start justify-start rounded">
@@ -32,8 +41,10 @@ const ServiceOrder = ({ data, id }) => {
           </div>
         ))}
       </div>
-      <Link to={`/pay/${id}`} className="w-full">
-        <button className="w-full h-10 rounded bg-primary/95 text-white hover:bg-primary outline-none">
+{/* {`/pay/${id}`} */}
+{/* to={`/bookings`} */}
+      <Link  className="w-full">
+        <button className="w-full h-10 rounded bg-primary/95 text-white hover:bg-primary outline-none" onClick={handleBooking}>
           Continue
         </button>
       </Link>

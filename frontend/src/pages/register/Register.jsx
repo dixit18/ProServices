@@ -27,7 +27,7 @@ function Register() {
     });
   };
 
-  const handleSeller = (e) => {
+  const handleServiceProvider = (e) => {
     setUser((prev) => {
       return { ...prev, isServiceProvider: e.target.checked };
     });
@@ -81,11 +81,11 @@ function Register() {
           <button type="submit">Register</button>
         </div>
         <div className="right">
-          <h1>I want to become a seller</h1>
+          <h1>I want to become a ServiceProvider</h1>
           <div className="toggle">
-            <label htmlFor="">Activate the seller account</label>
+            <label htmlFor="">Activate the se account</label>
             <label className="switch">
-              <input type="checkbox" onChange={handleSeller} />
+              <input type="checkbox" onChange={handleServiceProvider} />
               <span className="slider round"></span>
             </label>
           </div>

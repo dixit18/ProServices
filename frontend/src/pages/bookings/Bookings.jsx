@@ -17,9 +17,9 @@ const Orders = () => {
   });
 console.log("bookings",data)
   const handleContact = async (order) => {
-    const sellerId = order.sellerId;
+    const  iserviceProviderId = order. iserviceProviderId;
     const buyerId = order.buyerId;
-    // const id = sellerId + buyerId;
+    // const id =  iserviceProviderId + buyerId;
 
     // try {
     //   const res = await newRequest.get(`/conversations/single/${id}`);
@@ -27,7 +27,7 @@ console.log("bookings",data)
     // } catch (err) {
     //   if (err.response.status === 404) {
     //     const res = await newRequest.post(`/conversations/`, {
-    //       to: currentUser.seller ? buyerId : sellerId,
+    //       to: currentUser.seller ? buyerId :  iserviceProviderId,
     //     });
     //     navigate(`/message/${res.data.id}`);
     //   }

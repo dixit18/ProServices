@@ -20,7 +20,7 @@ const BookingSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    sellerId: {
+     iserviceProviderId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
@@ -40,7 +40,12 @@ const BookingSchema = new mongoose.Schema(
     isCompleted:{
       type:Boolean,
       default:false
-    }
+    },
+    status: {
+      type: String,
+      enum: ['pending', 'accepted', 'completed', 'rejected'],
+      default: 'pending',
+    },
   },
   {
     timestamps: true,

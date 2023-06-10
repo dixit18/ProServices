@@ -7,7 +7,7 @@ const ConversationSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    sellerId: {
+     iserviceProviderId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,

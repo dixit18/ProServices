@@ -7,9 +7,14 @@ import requests from "../../libs/request";
 import useAuthStore from "../../stores";
 import loader from "../../assets/icons/loader.svg";
 import { useNavigate } from "react-router-dom";
+import { Button } from '@mui/material';
+import { useSelector } from "react-redux";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Orders = () => {
   // const { authUser } = useAuthStore();
+  const user = useSelector((state)=>state.auth)
   const navigate = useNavigate();
 
   const { isLoading, error, data } = useQuery({
@@ -17,26 +22,111 @@ const Orders = () => {
     queryFn: () => Axios.get(`${requests.orders}`).then((res) => res.data.booking),
   });
 
+const handleAcceptServiceForProvider = async (acceptId)=>{
+  try{
+    const response = await Axios.patch(`${requests.orders}/${acceptId}`,{
+      status:"accepted"
+    })
+    console.log(response,"responser form order ")
+  }catch(err){
+    console.log(err)
+  }
 
-console.log(data)
-  const tableActions = data?.map((item) => ({
+}
+
+const handleRejectServiceForProvider = async (deleteid)=>{
+  try{
+    const response = await Axios.patch(`${requests.orders}/${deleteid}`,{
+      status:"rejected"
+    })
+    console.log(response,"responser form delete")
+  }catch(err){
+    console.log(err)
+  }
+}
+console.log(data,"order js")
+//   const tableActions = data?.map((item) => ({
   
+//     title: (
+//       <p className="w-full flex items-center justify-start">{item.title}</p>
+//     ),
+//     price: (
+//       <p className="w-full flex items-center justify-start">{item.price}</p>
+//     ),
+//   Contact:(
+// <p className="w-full flex items-center justify-start">{item.price}</p>
+//   ),
+//     actions: (
+      // <div
+      //   className="w-8 h-8 cursor-pointer bg-blue-600 rounded-full flex items-center justify-center text-white"
+      //   // onClick={() => handleContact(item)
+      //   // }
+      // >
+      //   <MdMail size={18} />
+      // </div>
+//     ),
+//   }));
+{/*
+
+ */}
+
+ const Box =({color, text})=>{
+return(
+  <div style={{border:"2px solid black", borderRadius:"8px", backgroundColor:`${color}`, width:"80px", height:"30px", paddingTop:"4px"}}>
+    <h6>{text}</h6>
+  </div>
+)
+ }
+
+ const tableActions = data?.map((item) => {
+  let actionButton;
+{console.log(item)}
+  if (!user.isServiceProvider) {
+    if (item.status === "pending") {
+      actionButton = <Box color={"#34ebd2"} text={"pending"}></Box>;
+    } else if (item.status === "accepted") {
+      actionButton = (
+        <Box color={"green"} text={"Accepted"}></Box>
+      );
+    } else if (item.status === "completed") {
+      actionButton = (<Box color={"#8e2ffa"} text={"Completed"}></Box>
+      );
+    } else {
+      actionButton = (
+        <Box color={"red"} text={"Rejected"}></Box>
+      );
+    }
+  } else {
+    actionButton = (
+      <div style={{ display: "flex", flexDirection: "row",gap:4 }}>
+        <Button variant="contained" color="success" onClick={()=>handleAcceptServiceForProvider(item._id)}>
+          <CheckCircleIcon />
+        </Button>
+        <Button variant="contained" color="error" onClick={()=>handleRejectServiceForProvider(item._id)}>
+          <DeleteIcon />
+        </Button>
+      </div>
+    );
+  }
+
+ //Kone connect kryo che?  are udit nu che upar valu khali chalu jaldi k mare functionality implement karavani che
+  return {
     title: (
       <p className="w-full flex items-center justify-start">{item.title}</p>
     ),
     price: (
       <p className="w-full flex items-center justify-start">{item.price}</p>
     ),
-    actions: (
+    Contact: (
       <div
         className="w-8 h-8 cursor-pointer bg-blue-600 rounded-full flex items-center justify-center text-white"
-        // onClick={() => handleContact(item)
-        // }
       >
         <MdMail size={18} />
       </div>
     ),
-  }));
+    actions: <div>{actionButton}</div>,
+  };
+});
 
   return (
     <main className="py-40">

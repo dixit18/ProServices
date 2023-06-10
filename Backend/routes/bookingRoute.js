@@ -9,5 +9,7 @@ router
   .post(isAuthenticated, bookingController.createPaymentIntent)
  ;
 // router.route("/:id").post(isAuthenticated, bookingController.createBooking);
+router.route("/:id").post(isAuthenticated,bookingController.createBooking)
+router.route("/:id").patch(bookingController.updateBooking)
 
 module.exports = router;

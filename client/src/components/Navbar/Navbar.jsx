@@ -31,6 +31,7 @@ const Navbar = () => {
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         setOpenDrop(false);
+        setProfileModal(false)
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -157,11 +158,11 @@ const Navbar = () => {
                         openDrop ? "flex" : "hidden"
                       }`}
                     >
+                      <NavLink to="/" onClick={()=>setProfileModal(true)} className="cursor-pointer text-black hidden hover:text-indigo-600 sm:flex">
+              Profile
+            </NavLink>
                       {user?.isServiceProvider && (
                         <>
-                      <NavLink>
-                        Profile
-                      </NavLink>
                           <NavLink
                             to="/myservices"
                             className="cursor-pointer w-full text-sm text-darkColor"
@@ -250,8 +251,18 @@ const Navbar = () => {
       )}
 
 
+ {profileModel && (
+        <div className="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex items-center justify-center">
+          <div className="relative max-w-md mx-auto md:max-w-2xl mt-6 min-w-0 break-words bg-gray-200 w-full mb-6 shadow-lg rounded-xl">
+           <Profile/>
+           </div>
+         </div>
+      )}
+
     </header>
   );
 };
 
 export  {Navbar};
+
+

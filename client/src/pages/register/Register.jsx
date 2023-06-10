@@ -36,7 +36,7 @@ function Register({ setShowModal }) {
     });
   };
 
-  const handleSeller = (e) => {
+  const handleServiceProvider = (e) => {
     setUser((prev) => {
       return { ...prev, isServiceProvider: e.target.checked };
     });
@@ -171,10 +171,10 @@ function Register({ setShowModal }) {
                     id="isServiceProvider"
                     className="mr-2"
                     type="checkbox"
-                    onChange={handleSeller}
+                    onChange={handleServiceProvider}
                   />
                   <label htmlFor="isServiceProvider">
-                    Activate the seller account
+                    Activate the ServiceProvider account
                   </label>
                 </div>
               </div>

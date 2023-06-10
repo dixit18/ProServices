@@ -3,19 +3,23 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { BsTrash } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { columns } from "../../data/data";
-import useAuthStore from "../../stores";
+// import useAuthStore from "../../stores";
 import loader from "../../assets/icons/loader.svg";
 import requests from "../../libs/request";
 import { Axios } from "../../config";
+import { useSelector } from "react-redux";
 
 const MyServices = () => {
-  const { authUser } = useAuthStore();
+
+  // const { authUser } = useAuthStore();
   let currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const queryClient = useQueryClient();
+  const user = useSelector((state)=>state.auth)
+  console.log(user,"in my service")
   const { isLoading, error, data, refetch } = useQuery({
     queryKey: ["myServices"],
     queryFn: () =>
-      Axios.get(`${requests.services}?userId=${currentUser.user._id}`).then(
+      Axios.get(`${requests.services}?userId=${user.id}`).then(
         (res) => res.data.services
       ),
   });

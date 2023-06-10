@@ -36,7 +36,8 @@ const initialState = {
   isServiceProvider: false,
   name: "",
   phone: "",
-  isLoogedIn:false
+  isLoogedIn:false,
+  id:""
 };
 
 const authSlice = createSlice({
@@ -59,6 +60,7 @@ const authSlice = createSlice({
         state.isServiceProvider = action.payload.isServiceProvider;
         state.name = action.payload.name;
         state.phone = action.payload.phone;
+        state.id = action.payload._id;
         state.isLoogedIn=true
       })
       .addCase(loginAsync.rejected, (state, action) => {
@@ -82,6 +84,7 @@ const authSlice = createSlice({
         state.name = "";
         state.phone = "";
         state.isLoogedIn=false
+        state.id = "";
       })
       .addCase(logoutAsync.rejected, (state, action) => {
         // Update the state to handle the logout failure

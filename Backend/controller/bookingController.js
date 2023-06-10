@@ -10,10 +10,11 @@ const createBooking = catchAsync(async (req, res, next) => {
     serviceId: service._id,
     img: service.img,
     title: service.title,
-    sellerId: service.userId,
+     iserviceProviderId: service.userId,
     buyerId: req.user._id,
     price: service.price,
-    payment: paymentIntent.id,
+    // payment: paymentIntent.id,
+    isCompleted: true
   });
 
   await newBooking.save();
@@ -23,16 +24,41 @@ const createBooking = catchAsync(async (req, res, next) => {
   });
 });
 
+
+
 const getBooking = catchAsync(async (req, res, next) => {
     const booking = await BookingModel.find({
-        ...(req.isServiceProvider?{sellerId:req.user._id}:{buyerId:req.user._id}),
+        ...(req.isServiceProvider?{ iserviceProviderId:req.user._id}:{buyerId:req.user._id}),
         isCompleted:true
 
     })
+
+    console.log(booking,"hello there")
     res.status(200).json({
         booking
     })
 })
+
+// Update order status
+const updateBooking = catchAsync (async(req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+console.log(status)
+    // Perform any necessary validation or authorization checks
+
+    // Update the order status
+    const updatedOrder = await BookingModel.findByIdAndUpdate(
+id    ,  { status },
+      { new: true }
+    );
+
+    if (!updatedOrder) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+    res.json({ order: updatedOrder });
+  
+});
+
 
 const createPaymentIntent = async(req,res,next)=>{
 const stripe = new Stripe(process.env.STRIPE)
@@ -50,13 +76,19 @@ const service = await ServiceModel.findById(req.params.id);
     serviceId: service._id,
     img: service.img,
     title: service.title,
-    sellerId: service.userId,
+     iserviceProviderId: service.userId,
     buyerId: req.user._id,
     price: service.price,
     payment: paymentIntent.id,
   });
-
-  await newBooking.save();
+  
+// const id = req.params.id
+//   // await newBooking.save();
+//   const newBooking = await BookingModel.findOneAndUpdate(
+//     { _id:id}, 
+//     { new: true } 
+//   );
+  
   res.status(200).send({
     clientSecret: paymentIntent.client_secret,
   });
@@ -80,5 +112,6 @@ console.log(orders);
 }
 module.exports = {
   createBooking,
-  getBooking,createPaymentIntent,confirm
+  getBooking,createPaymentIntent,confirm,
+  updateBooking
 };
